@@ -9,5 +9,5 @@ git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
 ## install config
 
 ```shell
-rm ~/.config/nvim/lua/custom -rf && git clone https:/github.com/ngtuonghy/nvchad_config --depth 1 ~/.config/nvim/lua/custom && nvim
+rm ~/.config/nvim/lua/custom -rf && git clone https://github.com/ngtuonghy/nvchad_config --depth 1 ~/.config/nvim/lua/custom && nvim
 ```
