@@ -1,0 +1,11 @@
+{
+  "box-sizing": {
+    "prefix": "d-bz",
+    "body": [
+      "-webkit-box-sizing: border-box;",
+      "-moz-box-size: border-box;",
+      "box-sizing: border-box;"
+    ],
+    "description": "border-box template"
+  }
+}

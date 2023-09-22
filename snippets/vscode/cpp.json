@@ -1,0 +1,15 @@
+{
+  "hello": {
+    "prefix": "hl",
+    "body": [
+      "#include <iostream>",
+      "",
+      "int main (int argc, char *argv[]) {",
+      "\t$1",
+      "",
+      "\treturn 0;",
+      "}"
+    ],
+    "description": "Standard starter template for a tiny C++ program"
+  }
+}
