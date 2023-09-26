@@ -95,6 +95,13 @@ lspconfig.html.setup {
   capabilities = capabilities,
 }
 lspconfig.cssls.setup {
+  settings = {
+    css = {
+      lint = {
+        unknownAtRules = "ignore",
+      },
+    },
+  },
   on_attach = on_attach,
   capabilities = capabilities,
 }
@@ -102,4 +109,5 @@ lspconfig.tsserver.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
+
 -----------------------------------------------------------------------
