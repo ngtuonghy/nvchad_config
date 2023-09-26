@@ -7,6 +7,8 @@ M.ui = {
   extended_integrations = {
     "notify",
     "dap",
+    "rainbowdelimiters",
+    "trouble",
   },
   statusline = {
     theme = "default", -- default/round/block/arrow (separators work only for "default" statusline theme;
@@ -22,8 +24,8 @@ M.ui = {
     end,
   },
 
-  theme = "oxocarbon",
-  theme_toggle = { "oxocarbon", "oxocarbon" },
+  theme = "tokyodark",
+  theme_toggle = { "tokyodark", "tokyodark" },
   cheatsheet = { theme = "grid" }, -- simple/grid
   nvdash = {
     load_on_startup = true,
