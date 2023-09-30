@@ -7,9 +7,9 @@ local lint = null_ls.builtins.diagnostics
 --
 local sources = {
   --  webdev stuff
-  format.deno_fmt,
+  -- format.deno_fmt,
   -- b.formatting.prettier,
-  format.prettier.with { filetypes = { "html", "markdown", "css", "javascript" } },
+  format.prettier.with { filetypes = { "html", "markdown", "css", "javascript", "jsx" } },
   -- Lua
   format.stylua,
   -- Shell
