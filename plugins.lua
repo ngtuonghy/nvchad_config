@@ -5,8 +5,10 @@ local plugins = {
   { import = "nvcommunity.git.lazygit" },
   { import = "nvcommunity.git.diffview" },
   { import = "nvcommunity.editor.rainbowdelimiters" },
-
+  "LazyVim/LazyVim",
+  { import = "lazyvim.plugins.extras.lang.rust" },
   --------------------------------------------- disable plugins ---------------------------------------------
+
   --------------------------------------------- overrides plugins ---------------------------------------------
   { "nvim-tree/nvim-tree.lua", opts = overrides.nvimtree },
   { "folke/lazy.nvim", opts = overrides.lazynvim },
@@ -217,17 +219,7 @@ local plugins = {
       require "custom.configs.extras.yanky-nvim"
     end,
   },
-  -- {
-  --   "smoka7/multicursors.nvim",
-  --   event = "VeryLazy",
-  --   dependencies = {
-  --     "nvim-treesitter/nvim-treesitter",
-  --     "smoka7/hydra.nvim",
-  --   },
-  --   opts = function()
-  --     require "custom.configs.extras.multicursors"
-  --   end,
-  -- },
+  { "mg979/vim-visual-multi", event = "VeryLazy" },
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
