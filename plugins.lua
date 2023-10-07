@@ -443,21 +443,13 @@ local plugins = {
     end,
   },
   {
-    "jcdickinson/http.nvim",
-    build = "cargo build --workspace --release",
-  },
-  {
-    "jcdickinson/codeium.nvim",
-    enabled = true,
-    event = "VeryLazy",
+    "Exafunction/codeium.nvim",
     dependencies = {
-      -- "jcdickinson/http.nvim",
       "nvim-lua/plenary.nvim",
       "hrsh7th/nvim-cmp",
     },
     config = function()
       require("codeium").setup {}
-      -- vim.api.nvim_set_hl(0, "CmpItemKindCodeium", { fg = "#1fc5b1" })
     end,
   },
 
