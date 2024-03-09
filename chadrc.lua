@@ -24,8 +24,8 @@ M.ui = {
     end,
   },
 
-  theme = "tokyodark",
-  theme_toggle = { "tokyodark", "tokyodark" },
+  theme = "catppuccin",
+  theme_toggle = { "catppuccin", "catppuccin" },
   cheatsheet = { theme = "grid" }, -- simple/grid
   nvdash = {
     load_on_startup = true,
