@@ -10,9 +10,9 @@ local plugins = {
   --------------------------------------------- disable plugins ---------------------------------------------
 
   --------------------------------------------- overrides plugins ---------------------------------------------
-  { "nvim-tree/nvim-tree.lua", opts = overrides.nvimtree },
-  { "folke/lazy.nvim", opts = overrides.lazynvim },
-  { "nvim-colorizer.lua", enabled = true, opts = overrides.colorizer },
+  { "nvim-tree/nvim-tree.lua",                  opts = overrides.nvimtree },
+  { "folke/lazy.nvim",                          opts = overrides.lazynvim },
+  { "nvim-colorizer.lua",                       enabled = true,           opts = overrides.colorizer },
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
@@ -219,7 +219,7 @@ local plugins = {
       require "custom.configs.extras.yanky-nvim"
     end,
   },
-  { "mg979/vim-visual-multi", event = "VeryLazy" },
+  { "mg979/vim-visual-multi",    event = "VeryLazy" },
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -412,8 +412,8 @@ local plugins = {
       require("better_escape").setup {
         mapping = { "jk", "jj" },
         timeout = vim.o.timeoutlen, -- the time in which the keys must be hit in ms. Use option timeoutlen by defaul
-        clear_empty_lines = false, -- clear line after escaping if there is only whitespace
-        keys = "<Esc>`^", -- keys used for escaping, if it is a function will use the result everytime
+        clear_empty_lines = false,  -- clear line after escaping if there is only whitespace
+        keys = "<Esc>`^",           -- keys used for escaping, if it is a function will use the result everytime
         -- example(recommended)
         -- keys = function()
         --   return vim.api.nvim_win_get_cursor(0)[2] > 1 and '<esc>l' or '<esc>'
