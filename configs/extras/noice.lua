@@ -1,8 +1,8 @@
 require("noice").setup {
   cmdline = {
-    enabled = true, -- enables the Noice cmdline UI
+    enabled = true,         -- enables the Noice cmdline UI
     view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
-    opts = {}, -- global options for the cmdline. See section on views
+    opts = {},              -- global options for the cmdline. See section on views
     ---@type table<string, CmdlineFormat>
     format = {
       -- conceal: (default=true) This will hide the text in the cmdline that matches the pattern.
@@ -21,11 +21,11 @@ require("noice").setup {
     },
   },
   presets = {
-    bottom_search = true, -- use a classic bottom cmdline for search
-    command_palette = true, -- position the cmdline and popupmenu together
+    bottom_search = true,         -- use a classic bottom cmdline for search
+    command_palette = true,       -- position the cmdline and popupmenu together
     long_message_to_split = true, -- long messages will be sent to a split
-    inc_rename = true, -- enables an input dialog for inc-rename.nvim
-    lsp_doc_border = false, -- add a border to hover docs and signature help
+    inc_rename = true,            -- enables an input dialog for inc-rename.nvim
+    lsp_doc_border = false,       -- add a border to hover docs and signature help
   },
   routes = {
     {

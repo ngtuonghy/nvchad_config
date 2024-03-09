@@ -1,12 +1,13 @@
 local overrides = require "custom.configs.overrides"
 local plugins = {
   "NvChad/nvcommunity",
-  { import = "nvcommunity.editor.treesittercontext" },
+  -- { import = "nvcommunity.editor.treesittercontext" },
   { import = "nvcommunity.git.lazygit" },
   { import = "nvcommunity.git.diffview" },
   { import = "nvcommunity.editor.rainbowdelimiters" },
-  "LazyVim/LazyVim",
-  { import = "lazyvim.plugins.extras.lang.rust" },
+  -- { import = "nvcommunity.folds.ufo" },
+  -- "LazyVim/LazyVim",
+  -- { import = "lazyvim.plugins.extras.lang.rust" },
   --------------------------------------------- disable plugins ---------------------------------------------
 
   --------------------------------------------- overrides plugins ---------------------------------------------
@@ -18,7 +19,7 @@ local plugins = {
     event = "InsertEnter",
     dependencies = {
       "hrsh7th/cmp-cmdline",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
+      -- "hrsh7th/cmp-nvim-lsp-signature-help",
     },
     opts = overrides.cmp,
   },
@@ -258,9 +259,13 @@ local plugins = {
     config = function()
       require("runner-nvim").setup {
         clearprevious = true,
+        autoremove = true,
         commands = {
           rust = {
             Makefile = "make",
+          },
+          cpp = {
+            debug = "cd $dir && g++ -g $fileName -o $fileNameWithoutExt",
           },
         },
       }
@@ -402,7 +407,26 @@ local plugins = {
     event = "VeryLazy",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      require("oil").setup {}
+      require("oil").setup {
+        view_options = {
+          -- Show files and directories that start with "."
+          show_hidden = true,
+          -- This function defines what is considered a "hidden" file
+          is_hidden_file = function(name, bufnr)
+            return vim.startswith(name, ".")
+          end,
+          -- This function defines what will never be shown, even when `show_hidden` is set
+          is_always_hidden = function(name, bufnr)
+            return false
+          end,
+          sort = {
+            -- sort order can be "asc" or "desc"
+            -- see :help oil-columns to see which columns are sortable
+            { "type", "asc" },
+            { "name", "asc" },
+          },
+        },
+      }
     end,
   },
   {
@@ -483,6 +507,26 @@ local plugins = {
     end,
   },
   { "wakatime/vim-wakatime", event = "VeryLazy" },
+  {
+    "ray-x/lsp_signature.nvim",
+    enabled = true,
+    event = "VeryLazy",
+    opts = {
+      floating_window = false,
+      hi_parameter = "IncSearch",
+      -- handler_opts = {
+      --   border = "shadow", -- double, rounded, single, shadow, none, or a table of borders
+      -- },
+
+      -- hint_inline = function()
+      --   return "inline"
+      -- end, // only nvim 0.10
+    },
+    config = function(_, opts)
+      require("lsp_signature").setup(opts)
+    end,
+  },
+  { "akinsho/toggleterm.nvim", enabled = false, lazy = false, version = "*", config = true },
 }
 
 return plugins

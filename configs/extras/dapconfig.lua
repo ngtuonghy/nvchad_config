@@ -80,10 +80,10 @@ dapui.setup {
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ Configurations                                           │
 -- ╰──────────────────────────────────────────────────────────╯
-
+--
 dap.configurations.cpp = {
   {
-    name = "Launch file shaha",
+    name = "Launch",
     type = "codelldb",
     request = "launch",
     program = function()
@@ -101,15 +101,15 @@ dap.configurations.cpp = {
     args = {},
   },
 }
--- javascript - typescript
-dap.adapters["pwa-node"] = {
-  type = "server",
-  host = "127.0.0.1",
-  port = 8123,
-  executable = {
-    command = "js-debug-adapter",
-  },
-}
+-- -- javascript - typescript
+-- dap.adapters["pwa-node"] = {
+--   type = "server",
+--   host = "127.0.0.1",
+--   port = 8123,
+--   executable = {
+--     command = "js-debug-adapter",
+--   },
+-- }
 
 for _, language in ipairs { "typescript", "javascript" } do
   dap.configurations[language] = {
