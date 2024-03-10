@@ -3,7 +3,7 @@
 ## install NvChad
 
 ```shell
-git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
+git clone --branch=v2.0 https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
 ```
 
 ## install config
