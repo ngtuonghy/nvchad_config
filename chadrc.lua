@@ -24,8 +24,8 @@ M.ui = {
     end,
   },
 
-  theme = "catppuccin",
-  theme_toggle = { "catppuccin", "catppuccin" },
+  theme = "gatekeeper",
+  theme_toggle = { "gatekeeper", "gatekeeper" },
   cheatsheet = { theme = "grid" }, -- simple/grid
   nvdash = {
     load_on_startup = true,
