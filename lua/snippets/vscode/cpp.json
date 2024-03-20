@@ -1,0 +1,20 @@
+{
+  "create main with comment name": {
+    "prefix": "main",
+    "body": [
+      "#include <iostream>",
+      "// Nguyen Tuong Hy",
+      "int main (int argc, char *argv[]) {",
+      "\t$1",
+      "",
+      "\treturn 0;",
+      "}"
+    ],
+    "description": "Standard starter template for a tiny C++ program"
+  },
+  "Create for loop": {
+    "prefix": "for",
+    "body": ["for(int i = 0; i < 10; i++)", "{", "   //code goes here", "}"],
+    "description": "Creates a for loop"
+  }
+}
