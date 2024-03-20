@@ -3,6 +3,15 @@ M.override = {
 	Comment = {
 		italic = true,
 	},
+	Boolean = { italic = true },
+	Conditional = { italic = true, bold = true },
+	Repeat = { italic = true },
+	["@keyword.return"] = { italic = true },
+	["@keyword.operator"] = { italic = true },
+	["@keyword.function"] = { italic = true },
+	["@exception"] = { italic = true },
+	["@include"] = { italic = true },
+	["@repeat"] = { italic = true },
 }
 M.add = {
 	-- HydraHint = { fg = "" },
@@ -59,7 +68,7 @@ M.add = {
 	DapLogPoint = { fg = "cyan", bg = "one_bg3" },
 	DapStopped = { fg = "baby_pink", bg = "one_bg3" },
 
-	VM_Insert = { bg = "yellow" },
+	VM_Insert = { fg = "black", bg = "yellow" },
 }
 
 return M

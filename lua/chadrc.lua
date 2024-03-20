@@ -14,6 +14,7 @@ function _G.mode()
 	local m = vim.api.nvim_get_mode().mode
 	return "%#" .. modes[m][2] .. "#" .. (modes[m][3] or "  ") .. modes[m][1] .. " "
 end
+
 M.ui = {
 	theme = "tokyodark",
 	cmp = {
@@ -49,8 +50,14 @@ M.ui = {
 			silent = true, -- silences 'no signature help available' message from appearing
 		},
 	},
+	integrations = {
+		"notify",
+		"mason",
+	},
 	hl_override = highlights.override,
 	hl_add = highlights.add,
 }
+
+vim.g.vscode_snippets_path = vim.fn.stdpath("config") .. "/lua/snippets/vscode"
 
 return M
