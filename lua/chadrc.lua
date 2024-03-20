@@ -1,5 +1,5 @@
 local M = {}
-
+local highlights = require("highlights")
 local function btn(str, hl, func)
 	str = "%#" .. hl .. "#" .. str
 	return "%@" .. func .. "@" .. str .. "%X"
@@ -49,6 +49,8 @@ M.ui = {
 			silent = true, -- silences 'no signature help available' message from appearing
 		},
 	},
+	hl_override = highlights.override,
+	hl_add = highlights.add,
 }
 
 return M

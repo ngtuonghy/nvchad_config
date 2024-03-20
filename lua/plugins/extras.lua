@@ -1,6 +1,5 @@
 return {
 	{
-		-- dir = "~/project/plugins/neovim/runner-nvchad",
 		"runner-nvchad",
 		dev = { true },
 		lazy = false,
@@ -9,7 +8,6 @@ return {
 		end,
 	},
 	{
-		-- dir = "~/project/plugins/neovim/runner-nvchad",
 		"ngtuonghy/live-server-nvim",
 		event = "VeryLazy",
 		build = ":LiveServerInstall",
@@ -46,9 +44,9 @@ return {
 			"rcarriga/nvim-dap-ui",
 			"theHamsta/nvim-dap-virtual-text",
 			"jay-babu/mason-nvim-dap.nvim",
+			"nvim-neotest/nvim-nio",
 		},
 		config = function()
-			-- dofile(vim.g.base46_cache .. "dap")
 			require("configs.dapconfig")
 		end,
 	},
@@ -61,11 +59,38 @@ return {
 			vim.fn["mkdp#util#install"]()
 		end,
 	},
-	"gbprod/yanky.nvim",
-	dependencies = {
-		{ "kkharji/sqlite.lua" },
+
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("configs.todo-comments")
+		end,
 	},
-	opts = {
-		ring = { storage = "sqlite" },
+	{ "mg979/vim-visual-multi", event = "VeryLazy" },
+	{ "wakatime/vim-wakatime", lazy = false },
+	{
+		"kylechui/nvim-surround",
+		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+		event = "VeryLazy",
+		config = function()
+			require("nvim-surround").setup({
+				-- Configuration here, or leave empty to use defaults
+			})
+		end,
+	},
+	{
+		"gbprod/yanky.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			{ "kkharji/sqlite.lua" },
+		},
+		config = function()
+			require("yanky").setup({
+				highlight = { timer = 100 },
+				ring = { storage = "sqlite", history_length = 1000 },
+				history_length = 1000,
+			})
+		end,
 	},
 }

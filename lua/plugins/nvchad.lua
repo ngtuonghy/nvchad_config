@@ -13,6 +13,11 @@ return {
 	{ import = "nvcommunity.git.lazygit" },
 	{ import = "nvcommunity.git.diffview" },
 	{ import = "nvcommunity.editor.rainbowdelimiters" },
+	{ import = "nvcommunity.editor.illuminate" },
+	{ import = "nvcommunity.file-explorer.oil-nvim" },
+	{ import = "nvcommunity.editor.rainbowdelimiters" },
+	{ import = "nvcommunity.editor.telescope-undo" },
+	{ import = "nvcommunity.diagnostics.trouble" },
 	{
 		"stevearc/conform.nvim",
 		config = function()
