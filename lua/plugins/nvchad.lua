@@ -1,13 +1,5 @@
 local overrides = require("configs.overrides")
 return {
-	{
-		"hrsh7th/nvim-cmp",
-		dependencies = {
-			"hrsh7th/cmp-cmdline",
-			-- "hrsh7th/cmp-nvim-lsp-signature-help",
-		},
-		opts = overrides.cmp,
-	},
 	"NvChad/nvcommunity",
 	-- { import = "nvcommunity.editor.treesittercontext" },
 	{ import = "nvcommunity.git.lazygit" },
@@ -18,6 +10,20 @@ return {
 	{ import = "nvcommunity.editor.rainbowdelimiters" },
 	{ import = "nvcommunity.editor.telescope-undo" },
 	{ import = "nvcommunity.diagnostics.trouble" },
+
+	{
+		"hrsh7th/nvim-cmp",
+		dependencies = {
+			"hrsh7th/cmp-cmdline",
+			-- "hrsh7th/cmp-nvim-lsp-signature-help",
+		},
+		opts = overrides.cmp,
+	},
+	{
+		"nvim-treesitter/nvim-treesitter",
+		dependencies = { "windwp/nvim-ts-autotag" },
+		opts = overrides.treesitter,
+	},
 	{
 		"stevearc/conform.nvim",
 		config = function()

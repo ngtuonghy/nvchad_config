@@ -116,3 +116,6 @@ end, { desc = "Toggle Debugger UI" })
 map("n", "<leader>dh", function()
 	require("dap.ui.widgets").hover()
 end, { desc = "Debugger Hover" })
+
+-- nvimtree
+map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Nvimtree Toggle window" })
