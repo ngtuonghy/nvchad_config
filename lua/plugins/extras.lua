@@ -1,5 +1,6 @@
 return {
 	{
+		--  "ngtuonghy/runner-nvchad",
 		"runner-nvchad",
 		dev = { true },
 		lazy = false,
