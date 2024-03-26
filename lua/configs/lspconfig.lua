@@ -15,6 +15,7 @@ require("mason-lspconfig").setup_handlers({
 })
 require("mason-lspconfig").setup({
 	ensure_installed = { "html", "cssls", "emmet_language_server", "clangd", "lua_ls", "tsserver" },
+	-- ["emmet_language_server"] = function() end,
 })
 
 lspconfig.lua_ls.setup({
@@ -42,11 +43,12 @@ lspconfig.lua_ls.setup({
 lspconfig.clangd.setup({
 	capabilities = { offsetEncoding = "utf-8" },
 })
+
 lspconfig.emmet_language_server.setup({
 	filetypes = {
 		"css",
-		"eruby",
 		"html",
+		"eruby",
 		"javascript",
 		"javascriptreact",
 		"less",
@@ -73,11 +75,14 @@ lspconfig.emmet_language_server.setup({
 		--- @type string[]
 		excludelanguages = {},
 	},
+	single_file_support = false,
 })
+
 lspconfig.html.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
 })
+
 lspconfig.cssls.setup({
 	settings = {
 		css = {

@@ -4,27 +4,30 @@ local function btn(str, hl, func)
 	str = "%#" .. hl .. "#" .. str
 	return "%@" .. func .. "@" .. str .. "%X"
 end
-function _G.mode()
-	local st_modules = require("nvchad.statusline.default")
-	local modes = st_modules.modes
-	modes["n"][3] = "  "
-	modes["v"][3] = "  "
-	modes["i"][3] = " 󰏪 "
-	modes["t"][3] = "  "
-	local m = vim.api.nvim_get_mode().mode
-	return "%#" .. modes[m][2] .. "#" .. (modes[m][3] or "  ") .. modes[m][1] .. " "
+
+local orders = function()
+	-- local theme = require("nvconfig").ui.statusline.theme
+	-- if theme == "default" or theme == "minimal" then
+	-- return { "custom_mode", "file", "git", "%=", "lsp_msg", "%=", "diagnostics", "lsp", "cwd", "cursor" }
+	-- end
+	return { "custom_mode", "file", "diagnostics", "git", "%=", "lsp_msg", "%=", "lsp", "cursor", "cwd" }
 end
 
 M.ui = {
-	theme = "tokyodark",
+	theme = "ayu_dark",
 	cmp = {
 		icons = true,
 		lspkind_text = true,
 		style = "default", -- default/flat_light/flat_dark/atom/atom_colored
 	},
 	statusline = {
-		-- order ={"mode"},
-		theme = "minimal", --'"default"'|'"vscode"'|'"vscode_colored"'|'"minimal"'
+		theme = "default", --'"default"'|'"vscode"'|'"vscode_colored"'|'"minimal"'
+		order = orders(),
+		modules = {
+			custom_mode = function()
+				return require("configs.stl").mode()
+			end,
+		},
 	},
 	nvdash = {
 		load_on_startup = true,
@@ -43,19 +46,21 @@ M.ui = {
 		},
 	},
 
-	lsp = {
-		-- show function signatures i.e args as you type
-		signature = {
-			disabled = true,
-			silent = true, -- silences 'no signature help available' message from appearing
-		},
-	},
+	-- lsp = { signature = true },
+	-- lsp = {
+	-- 	-- show function signatures i.e args as you type
+	-- 	signature = true,
+	-- },
+
+	hl_override = highlights.override,
+	hl_add = highlights.add,
+}
+M.base46 = {
 	integrations = {
 		"notify",
 		"mason",
+		"rainbowdelimiters",
 	},
-	hl_override = highlights.override,
-	hl_add = highlights.add,
 }
 
 vim.g.vscode_snippets_path = vim.fn.stdpath("config") .. "/lua/snippets/vscode"
