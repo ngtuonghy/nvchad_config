@@ -119,3 +119,5 @@ end, { desc = "Debugger Hover" })
 
 -- nvimtree
 map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Nvimtree Toggle window" })
+
+map("n", "<C-x>", "<Plug>(VM-Find-Under)")

@@ -30,7 +30,7 @@ M.cmp = {
 		}),
 	},
 
-	sourcess = {
+	sources = {
 		{ name = "nvim_lsp" },
 		-- { name = "codeium" },
 		{ name = "luasnip" },
@@ -63,5 +63,28 @@ M.cmp = {
 			{ name = "path" },
 		}),
 	}),
+}
+
+M.treesitter = {
+	autotag = {
+		enable = true,
+		filetypes = {
+			"html",
+			"javascript",
+			"typescript",
+			"javascriptreact",
+			"typescriptreact",
+			"svelte",
+			"vue",
+			"tsx",
+			"jsx",
+			"rescript",
+			"css",
+			"lua",
+			"xml",
+			"php",
+			"markdown",
+		},
+	},
 }
 return M

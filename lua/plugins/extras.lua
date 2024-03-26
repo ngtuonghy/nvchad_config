@@ -108,4 +108,55 @@ return {
     { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
   },
 	},
+	{ "stevearc/dressing.nvim", lazy = false, opts = {} },
+	{
+		"echasnovski/mini.indentscope",
+		version = "*", -- wait till new 0.7.0 release to put it back on semver
+		event = { "BufReadPre", "BufNewFile" },
+		opts = {
+			-- symbol = "▏",
+			-- symbol = '╎',
+			symbol = "│",
+			options = { try_as_border = true },
+		},
+		init = function()
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = {
+					"help",
+					"alpha",
+					"dashboard",
+					"neo-tree",
+					"Trouble",
+					"lazy",
+					"mason",
+					"notify",
+					"toggleterm",
+					"lazyterm",
+					"nvcheatsheet",
+					"aerial",
+				},
+				callback = function()
+					vim.b.miniindentscope_disable = true
+				end,
+			})
+		end,
+	},
+	{
+		"luukvbaal/statuscol.nvim",
+		config = function()
+			-- local builtin = require("statuscol.builtin")
+			require("configs.statuscol")
+		end,
+	},
+	{
+		"kevinhwang91/nvim-ufo",
+		dependencies = {
+			"kevinhwang91/promise-async",
+			"luukvbaal/statuscol.nvim",
+		},
+		event = "VeryLazy",
+		config = function()
+			require("configs.nvim-ufo")
+		end,
+	},
 }

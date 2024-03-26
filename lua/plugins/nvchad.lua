@@ -1,14 +1,13 @@
 local overrides = require("configs.overrides")
 return {
 	"NvChad/nvcommunity",
-	-- { import = "nvcommunity.editor.treesittercontext" },
 	{ import = "nvcommunity.git.lazygit" },
 	{ import = "nvcommunity.git.diffview" },
 	{ import = "nvcommunity.editor.rainbowdelimiters" },
 	{ import = "nvcommunity.editor.illuminate" },
-	{ import = "nvcommunity.file-explorer.oil-nvim" },
 	{ import = "nvcommunity.editor.rainbowdelimiters" },
 	{ import = "nvcommunity.editor.telescope-undo" },
+	{ import = "nvcommunity.file-explorer.oil-nvim" },
 	{ import = "nvcommunity.diagnostics.trouble" },
 
 	{
