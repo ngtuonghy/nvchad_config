@@ -32,6 +32,7 @@ M.cmp = {
 
 	sources = {
 		{ name = "nvim_lsp" },
+		{ name = "copilot", group_index = 2 },
 		-- { name = "codeium" },
 		{ name = "luasnip" },
 		-- { name = "cmp_tabnine" },
@@ -39,6 +40,21 @@ M.cmp = {
 		{ name = "buffer" },
 		{ name = "nvim_lua" },
 		{ name = "path" },
+	},
+	--
+	matching = {
+		disallow_fuzzy_matching = true,
+		disallow_fullfuzzy_matching = true,
+		disallow_partial_fuzzy_matching = true,
+		disallow_partial_matching = false,
+		disallow_prefix_unmatching = true,
+	},
+	sorting = {
+		comparators = {
+			cmp.config.compare.exact,
+			cmp.config.compare.offset,
+			cmp.config.compare.recently_used,
+		},
 	},
 	experimental = {
 		ghost_text = {
@@ -65,26 +81,13 @@ M.cmp = {
 	}),
 }
 
-M.treesitter = {
-	autotag = {
-		enable = true,
-		filetypes = {
-			"html",
-			"javascript",
-			"typescript",
-			"javascriptreact",
-			"typescriptreact",
-			"svelte",
-			"vue",
-			"tsx",
-			"jsx",
-			"rescript",
-			"css",
-			"lua",
-			"xml",
-			"php",
-			"markdown",
-		},
+M.colorizer = {
+	filetypes = {
+		"*", -- Highlight all files, but customize some others.
+		cmp_docs = { always_update = true },
+	},
+	user_default_options = {
+		css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
 	},
 }
 return M

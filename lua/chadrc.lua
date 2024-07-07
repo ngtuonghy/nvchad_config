@@ -14,7 +14,7 @@ local orders = function()
 end
 
 M.ui = {
-	theme = "ayu_dark",
+	theme = "gatekeeper",
 	cmp = {
 		icons = true,
 		lspkind_text = true,

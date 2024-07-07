@@ -121,3 +121,48 @@ end, { desc = "Debugger Hover" })
 map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Nvimtree Toggle window" })
 
 map("n", "<C-x>", "<Plug>(VM-Find-Under)")
+
+-- map({ "n", "v", "i", "t" }, "<C-l>", function()
+-- 	require("nvchad.term").runner({
+-- 		id = "RunAndBuildTerminal",
+-- 		pos = "sp",
+-- 		cmd = function()
+-- 			local file = vim.fn.expand("%")
+-- 			local sfile = vim.fn.expand("%:r")
+-- 			local ft_cmds = {
+-- 				sh = "bash " .. file,
+-- 				rust = "cargo " .. file,
+-- 				python = "python3 " .. file,
+-- 				javascript = "node " .. file,
+-- 				go = "go build && go run " .. file,
+-- 				c = "g++ " .. file .. " -o " .. sfile .. " && ./" .. sfile,
+-- 				cpp = "g++ " .. file .. " -o " .. sfile .. " && ./" .. sfile,
+-- 				typescript = "deno compile " .. file .. " && deno run " .. file,
+-- 			}
+-- 			return ft_cmds[vim.bo.ft]
+-- 		end,
+-- 	})
+-- end, { desc = "Build and Run " })
+map("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+map("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+map("n", "Xo", "<CMD>lua require'nvchad.tabufline'.closeOtherBufs()<CR>", { desc = "Close other buffers " })
+map("n", "Xa", "<CMD>lua require'nvchad.tabufline'.closeAllBufs()<CR>", { desc = "Close all buffers" })
+map(
+	"n",
+	"Xr",
+	"<CMD>lua require'nvchad.tabufline'.closeBufs_at_direction 'right'<CR>",
+	{ desc = "Close right buffers" }
+)
+map({ "n", "v", "i", "t" }, "<M-u>", "<cmd>Runner<CR>", { desc = "Build and Run file" })
+
+--Trouble
+map("n", "<leader>tX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Buffer Diagnostics (Trouble)" })
+map("n", "<leader>ts", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "Symbols (Trouble)" })
+map(
+	"n",
+	"<leader>tl",
+	"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+	{ desc = "LSP Definitions / references / ... (Trouble)" }
+)
+map("n", "<leader>tL", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List (Trouble)" })
+map("n", "<leader>tQ", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List (Trouble)" })

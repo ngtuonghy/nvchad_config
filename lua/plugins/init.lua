@@ -1,13 +1,140 @@
+local overrides = require("configs.overrides")
+
 return {
+	"NvChad/nvcommunity",
+	{ import = "nvcommunity.git.lazygit" },
+	{ import = "nvcommunity.git.diffview" },
+	{ import = "nvcommunity.editor.rainbowdelimiters" },
+	{ import = "nvcommunity.editor.illuminate" },
+	{ import = "nvcommunity.editor.rainbowdelimiters" },
+	{ import = "nvcommunity.editor.telescope-undo" },
+	{ import = "nvcommunity.file-explorer.oil-nvim" },
+	{ import = "nvcommunity.diagnostics.trouble" },
+	{ import = "nvcommunity.completion.copilot" },
+
 	{
-		--  "ngtuonghy/runner-nvchad",
-		"runner-nvchad",
-		dev = { true },
+		"hrsh7th/nvim-cmp",
+		dependencies = {
+			"hrsh7th/cmp-cmdline",
+			-- "hrsh7th/cmp-nvim-lsp-signature-help",
+		},
+		opts = overrides.cmp,
+	},
+
+	{ "nvim-colorizer.lua", enabled = true, opts = overrides.colorizer },
+
+	{
+		"nvim-treesitter/nvim-treesitter",
+		opts = {
+			ensure_installed = {
+				"vim",
+				"html",
+				"css",
+				"javascript",
+				"json",
+				"toml",
+				"markdown",
+				"c",
+				"bash",
+				"lua",
+				"tsx",
+				"typescript",
+			},
+			incremental_selection = {
+				enable = true,
+				keymaps = {
+					init_selection = "gnn",
+					node_incremental = "grn",
+					scope_incremental = "grc",
+					node_decremental = "grm",
+				},
+			},
+		},
+		dependencies = {
+			{
+				"windwp/nvim-ts-autotag",
+				config = function()
+					require("nvim-ts-autotag").setup()
+				end,
+			},
+		},
+	},
+
+	{
+		"stevearc/conform.nvim",
+		event = "BufReadPre",
+		config = function()
+			require("configs.conform")
+		end,
+	},
+
+	{
+		"nvim-tree/nvim-tree.lua",
+		opts = {
+			git = { enable = true },
+		},
+	},
+	{
+		"numToStr/Comment.nvim",
+		event = "VeryLazy",
+		dependencies = { "nvim-treesitter", "JoosepAlviste/nvim-ts-context-commentstring" },
+		opts = function()
+			require("Comment").setup({
+				pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+			})
+		end,
+	},
+
+	{
+		"neovim/nvim-lspconfig",
+		dependencies = {
+			"mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+			"pmizio/typescript-tools.nvim",
+		},
+		config = function()
+			require("nvchad.configs.lspconfig").defaults()
+			require("configs.lspconfig")
+		end,
+	},
+
+	{
+		"williamboman/mason.nvim",
+		opts = {
+			ensure_installed = {
+				"lua-language-server",
+				"stylua",
+				"css-lsp",
+				"html-lsp",
+				-- "typescript-language-server",
+				"deno",
+				"prettier",
+				"biome",
+				"emmet-language-server",
+				"json-lsp",
+				-- "tailwindcss-language-server",
+				-- "unocss-language-server",
+				"shfmt",
+				-- "shellcheck",
+				-- "bash-language-server",
+				-- "clangd",
+				-- "clang-format",
+			},
+		},
+	},
+
+	------------------------------------custom plugin----------------------------------------
+
+	{
+		"ngtuonghy/runner-nvchad",
+		-- "runner-nvchad",
+		-- dev = { true },
 		lazy = false,
 		config = function()
 			require("runner-nvchad").setup({})
 		end,
 	},
+
 	{
 		"ngtuonghy/live-server-nvim",
 		event = "VeryLazy",
@@ -27,6 +154,7 @@ return {
 			})
 		end,
 	},
+
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
@@ -38,6 +166,7 @@ return {
 			require("configs.noice")
 		end,
 	},
+
 	{
 		"mfussenegger/nvim-dap",
 		event = "VeryLazy",
@@ -51,7 +180,7 @@ return {
 			require("configs.dapconfig")
 		end,
 	},
-	-- install without yarn or npm
+
 	{
 		"iamcco/markdown-preview.nvim",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
@@ -68,8 +197,11 @@ return {
 			require("configs.todo-comments")
 		end,
 	},
+
 	{ "mg979/vim-visual-multi", event = "VeryLazy" },
+
 	{ "wakatime/vim-wakatime", lazy = false },
+
 	{
 		"kylechui/nvim-surround",
 		version = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -80,6 +212,7 @@ return {
 			})
 		end,
 	},
+
 	{
 		"gbprod/yanky.nvim",
 		event = "VeryLazy",
@@ -94,6 +227,7 @@ return {
 			})
 		end,
 	},
+
 	{
 		"folke/flash.nvim",
 		event = "VeryLazy",
@@ -108,7 +242,9 @@ return {
     { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
   },
 	},
+
 	{ "stevearc/dressing.nvim", lazy = false, opts = {} },
+
 	{
 		"echasnovski/mini.indentscope",
 		version = "*", -- wait till new 0.7.0 release to put it back on semver
@@ -141,6 +277,7 @@ return {
 			})
 		end,
 	},
+
 	{
 		"luukvbaal/statuscol.nvim",
 		config = function()
@@ -148,6 +285,7 @@ return {
 			require("configs.statuscol")
 		end,
 	},
+
 	{
 		"kevinhwang91/nvim-ufo",
 		dependencies = {
@@ -158,5 +296,39 @@ return {
 		config = function()
 			require("configs.nvim-ufo")
 		end,
+	},
+
+	{
+		"OXY2DEV/markview.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			-- You may not need this if you don't lazy load
+			-- Or if the parsers are in your $RUNTIMEPATH
+			"nvim-treesitter/nvim-treesitter",
+
+			"nvim-tree/nvim-web-devicons",
+		},
+	},
+
+	-- dim inactive windows
+	{
+		"andreadev-it/shade.nvim",
+		config = function()
+			require("shade").setup({
+				exclude_filetypes = { "NvimTree" },
+			})
+		end,
+	},
+
+	{
+		"nvim-telescope/telescope.nvim",
+		opts = {
+			extensions_list = { "fzf", "terms", "nerdy" },
+		},
+
+		dependencies = {
+			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+			"2kabhishek/nerdy.nvim",
+		},
 	},
 }
