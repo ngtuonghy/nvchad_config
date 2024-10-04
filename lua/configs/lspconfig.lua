@@ -5,19 +5,20 @@ local on_init = configs.on_init
 local capabilities = configs.capabilities
 
 local lspconfig = require("lspconfig")
--- local servers = { "html", "cssls", "clangd"}
-
 -- auto setup
 require("mason-lspconfig").setup_handlers({
 	function(server)
 		lspconfig[server].setup({})
 	end,
 })
-require("mason-lspconfig").setup({
-	ensure_installed = { "html", "cssls", "emmet_language_server", "clangd", "lua_ls", "tsserver" },
-	-- ["emmet_language_server"] = function() end,
+require("mason-lspconfig").setup({})
+--
+require("typescript-tools").setup({
+	-- on_attach = on_attach,
+	-- on_init = on_init,
+	-- capabilities = capabilities,
 })
-
+--
 lspconfig.lua_ls.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
@@ -107,7 +108,7 @@ lspconfig.cssls.setup({
 	capabilities = capabilities,
 })
 
-lspconfig.tsserver.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
+-- lspconfig.tsserver.setup({
+-- 	on_attach = on_attach,
+-- 	capabilities = capabilities,
+-- })

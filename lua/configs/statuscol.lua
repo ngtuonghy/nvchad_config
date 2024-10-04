@@ -29,12 +29,12 @@ require("statuscol").setup({
 		},
 		-- Segment: show sign
 		{
-			sign = { name = { ".*" }, maxwidth = 1, colwidth = 2, auto = false, wrap = true },
+			sign = { namespace = { "diagnostic/signs" }, maxwidth = 2, colwidth = 1, auto = false, wrap = true },
 			click = "v:lua.ScSa",
 		},
 		-- Segment: Show line number
 		{
-			text = { " ", " ", builtin.lnumfunc },
+			text = { " ", builtin.lnumfunc },
 			click = "v:lua.ScLa",
 			condition = { true, builtin.not_empty },
 		},

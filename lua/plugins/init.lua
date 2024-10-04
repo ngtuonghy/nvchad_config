@@ -20,9 +20,6 @@ return {
 		},
 		opts = overrides.cmp,
 	},
-
-	{ "nvim-colorizer.lua", enabled = true, opts = overrides.colorizer },
-
 	{
 		"nvim-treesitter/nvim-treesitter",
 		opts = {
@@ -100,29 +97,8 @@ return {
 
 	{
 		"williamboman/mason.nvim",
-		opts = {
-			ensure_installed = {
-				"lua-language-server",
-				"stylua",
-				"css-lsp",
-				"html-lsp",
-				-- "typescript-language-server",
-				"deno",
-				"prettier",
-				"biome",
-				"emmet-language-server",
-				"json-lsp",
-				-- "tailwindcss-language-server",
-				-- "unocss-language-server",
-				"shfmt",
-				-- "shellcheck",
-				-- "bash-language-server",
-				-- "clangd",
-				-- "clang-format",
-			},
-		},
+		opts = {},
 	},
-
 	------------------------------------custom plugin----------------------------------------
 
 	{
@@ -139,8 +115,7 @@ return {
 		"ngtuonghy/live-server-nvim",
 		event = "VeryLazy",
 		build = ":LiveServerInstall",
-		-- "live-server-nvim",
-		-- dev = { true },
+		dev = true,
 		-- lazy = false,
 		config = function()
 			require("live-server-nvim").setup({
@@ -178,15 +153,6 @@ return {
 		},
 		config = function()
 			require("configs.dapconfig")
-		end,
-	},
-
-	{
-		"iamcco/markdown-preview.nvim",
-		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-		ft = { "markdown" },
-		build = function()
-			vim.fn["mkdp#util#install"]()
 		end,
 	},
 
@@ -279,14 +245,6 @@ return {
 	},
 
 	{
-		"luukvbaal/statuscol.nvim",
-		config = function()
-			-- local builtin = require("statuscol.builtin")
-			require("configs.statuscol")
-		end,
-	},
-
-	{
 		"kevinhwang91/nvim-ufo",
 		dependencies = {
 			"kevinhwang91/promise-async",
@@ -295,6 +253,7 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require("configs.nvim-ufo")
+			require("configs.statuscol")
 		end,
 	},
 

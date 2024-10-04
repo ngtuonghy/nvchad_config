@@ -13,12 +13,23 @@ local orders = function()
 	return { "custom_mode", "file", "diagnostics", "git", "%=", "lsp_msg", "%=", "lsp", "cursor", "cwd" }
 end
 
-M.ui = {
+M.base46 = {
 	theme = "gatekeeper",
+	hl_override = highlights.override,
+	hl_add = highlights.add,
+}
+M.nvdash = {
+	load_on_startup = true,
+}
+M.ui = {
 	cmp = {
-		icons = true,
+		icons_left = true, -- only for non-atom styles!
 		lspkind_text = true,
 		style = "default", -- default/flat_light/flat_dark/atom/atom_colored
+		format_colors = {
+			tailwind = false, -- will work for css lsp too
+			icon = "󱓻",
+		},
 	},
 	statusline = {
 		theme = "default", --'"default"'|'"vscode"'|'"vscode_colored"'|'"minimal"'
@@ -29,11 +40,9 @@ M.ui = {
 			end,
 		},
 	},
-	nvdash = {
-		load_on_startup = true,
-	},
+
 	tabufline = {
-		lazyload = false,
+		lazyload = true,
 		--  more opts
 		order = { "treeOffset", "buffers", "tabs", "runner", "split", "btns" },
 		modules = {
@@ -45,21 +54,25 @@ M.ui = {
 			end,
 		},
 	},
-
-	-- lsp = { signature = true },
-	-- lsp = {
-	-- 	-- show function signatures i.e args as you type
-	-- 	signature = true,
-	-- },
-
-	hl_override = highlights.override,
-	hl_add = highlights.add,
 }
-M.base46 = {
-	integrations = {
-		"notify",
-		"mason",
-		"rainbowdelimiters",
+M.mason = {
+	cmd = true,
+	pkgs = {
+		"emmet-language-server",
+		"lua-language-server",
+		"css-lsp",
+		"html-lsp",
+		"typescript-language-server",
+		"prettier",
+		"emmet-language-server",
+		"json-lsp",
+		-- "tailwindcss-language-server",
+		-- "unocss-language-server",
+		"shfmt",
+		"shellcheck",
+		"bash-language-server",
+		-- "clangd",
+		-- "clang-format"," },
 	},
 }
 

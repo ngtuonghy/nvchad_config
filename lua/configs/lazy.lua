@@ -44,7 +44,7 @@ return {
 		},
 	},
 	dev = {
-		path = "~/project/plugins/neovim/",
+		path = "~/workspace/plugins/neovim/",
 		patterns = {},
 	},
 }
