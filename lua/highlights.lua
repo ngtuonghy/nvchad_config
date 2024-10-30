@@ -63,10 +63,10 @@ M.add = {
 	-- TodoSignTODO = { fg = "blue" },
 	--
 	-- -- NOTE: dap
-	-- DapBreakpoint = { fg = "red" },
-	-- DapBreakpointCondition = { fg = "yellow", bg = "one_bg3" },
-	-- DapLogPoint = { fg = "cyan", bg = "one_bg3" },
-	-- DapStopped = { fg = "baby_pink", bg = "one_bg3" },
+	DapBreakpoint = { fg = "red" },
+	DapBreakpointCondition = { fg = "yellow", bg = "one_bg3" },
+	DapLogPoint = { fg = "cyan", bg = "one_bg3" },
+	DapStopped = { fg = "green", bg = "" },
 	--
 	VM_Insert = { fg = "black", bg = "yellow" },
 	FoldColumn = {

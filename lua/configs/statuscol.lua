@@ -29,9 +29,14 @@ require("statuscol").setup({
 		},
 		-- Segment: show sign
 		{
+			sign = { name = { ".*" }, maxwidth = 2, colwidth = 1, auto = false, wrap = true },
+			click = "v:lua.ScSa",
+		},
+		{
 			sign = { namespace = { "diagnostic/signs" }, maxwidth = 2, colwidth = 1, auto = false, wrap = true },
 			click = "v:lua.ScSa",
 		},
+
 		-- Segment: Show line number
 		{
 			text = { " ", builtin.lnumfunc },
