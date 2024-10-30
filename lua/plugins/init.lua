@@ -144,7 +144,7 @@ return {
 
 	{
 		"mfussenegger/nvim-dap",
-		event = "VeryLazy",
+		lazy = false,
 		dependencies = {
 			"rcarriga/nvim-dap-ui",
 			"theHamsta/nvim-dap-virtual-text",

@@ -3,15 +3,18 @@ local options = {
 	formatters_by_ft = {
 		svelte = { "svelte_fmt" }, -- custom
 		lua = { "stylua" },
+		c = { "clang-format" },
+		cpp = { "clang-format" },
 
 		-- webdev
 		javascript = { "biome" },
 		javascriptreact = { "biome" },
 		typescript = { "biome" },
 		typescriptreact = { "biome" },
+		vue = { "prettier" },
 
 		css = { "biome" },
-		html = { "biome" },
+		html = { "prettier" },
 		json = { "biome" },
 		jsonc = { "biome" },
 

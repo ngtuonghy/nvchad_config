@@ -14,11 +14,33 @@ require("mason-lspconfig").setup_handlers({
 require("mason-lspconfig").setup({})
 --
 require("typescript-tools").setup({
-	-- on_attach = on_attach,
-	-- on_init = on_init,
-	-- capabilities = capabilities,
+	on_attach = on_attach,
+	on_init = on_init,
+	capabilities = capabilities,
+})
+lspconfig.volar.setup({
+	on_attach = on_attach,
+	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+	init_options = {
+		vue = {
+			hybridMode = false,
+		},
+	},
 })
 --
+require("lspconfig").tailwindcss.setup({
+	settings = {
+		tailwindCSS = {
+			experimental = {
+				classRegex = {
+					{ "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+					{ "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+				},
+			},
+		},
+	},
+})
+
 lspconfig.lua_ls.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
