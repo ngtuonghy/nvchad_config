@@ -66,13 +66,15 @@ M.mason = {
 		"prettier",
 		"emmet-language-server",
 		"json-lsp",
-		-- "tailwindcss-language-server",
+		"vue-language-server",
+		"tailwindcss-language-server",
 		-- "unocss-language-server",
+		"biome",
 		"shfmt",
 		"shellcheck",
 		"bash-language-server",
-		-- "clangd",
-		-- "clang-format"," },
+		"clangd",
+		"clang-format",
 	},
 }
 
