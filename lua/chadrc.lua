@@ -14,7 +14,7 @@ local orders = function()
 end
 
 M.base46 = {
-	theme = "gatekeeper",
+	theme = "ayu_dark",
 	hl_override = highlights.override,
 	hl_add = highlights.add,
 }
@@ -24,21 +24,22 @@ M.nvdash = {
 M.ui = {
 	cmp = {
 		icons_left = true, -- only for non-atom styles!
-		lspkind_text = true,
+		lspkind_text = false,
 		style = "default", -- default/flat_light/flat_dark/atom/atom_colored
 		format_colors = {
 			tailwind = false, -- will work for css lsp too
 			icon = "󱓻",
 		},
 	},
+
 	statusline = {
-		theme = "default", --'"default"'|'"vscode"'|'"vscode_colored"'|'"minimal"'
-		order = orders(),
-		modules = {
-			custom_mode = function()
-				return require("configs.stl").mode()
-			end,
-		},
+		theme = "minimal", --'"default"'|'"vscode"'|'"vscode_colored"'|'"minimal"'
+		-- order = orders(),
+		-- modules = {
+		-- 	custom_mode = function()
+		-- 		return require("configs.stl").mode()
+		-- 	end,
+		-- },
 	},
 
 	tabufline = {
@@ -66,6 +67,7 @@ M.mason = {
 		"prettier",
 		"emmet-language-server",
 		"json-lsp",
+		"jdtls",
 		"vue-language-server",
 		"tailwindcss-language-server",
 		-- "unocss-language-server",

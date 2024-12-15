@@ -15,19 +15,38 @@ require("mason-lspconfig").setup({})
 --
 require("typescript-tools").setup({
 	on_attach = on_attach,
-	on_init = on_init,
-	capabilities = capabilities,
+	settings = {
+		filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+		tsserver_plugins = {
+			name = "@vue/typescript-plugin",
+		},
+	},
 })
 lspconfig.volar.setup({
 	on_attach = on_attach,
-	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+	-- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 	init_options = {
 		vue = {
 			hybridMode = false,
 		},
 	},
 })
---
+
+-- local config = {
+-- 	settings = {
+-- 		filetypes = { "java" },
+-- 		java = {},
+-- 	},
+-- 	cmd = {
+-- 		vim.fn.expand("~/.local/share/nvim/mason/bin/jdtls"),
+-- 	},
+-- 	root_dir = vim.fs.dirname(
+-- 		vim.fs.find({ ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }, { upward = true })[1]
+-- 	),
+-- }
+-- require("jdtls").start_or_attach(config)
+-- lspconfig.jdtls.setup({})
+
 require("lspconfig").tailwindcss.setup({
 	settings = {
 		tailwindCSS = {
@@ -64,6 +83,7 @@ lspconfig.lua_ls.setup({
 })
 
 lspconfig.clangd.setup({
+	on_attach = on_attach,
 	capabilities = { offsetEncoding = "utf-8" },
 })
 lspconfig.emmet_language_server.setup({
@@ -107,10 +127,10 @@ lspconfig.html.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
 })
-lspconfig.jdtls.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
+-- lspconfig.jdtls.setup({
+-- 	on_attach = on_attach,
+-- 	capabilities = capabilities,
+-- })
 lspconfig.sqlls.setup({
 	capabilities = capabilities,
 	filetypes = { "sql" },

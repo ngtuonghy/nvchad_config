@@ -15,10 +15,10 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
-			"hrsh7th/cmp-cmdline",
+			-- "hrsh7th/cmp-cmdline",
 			-- "hrsh7th/cmp-nvim-lsp-signature-help",
 		},
-		opts = overrides.cmp,
+		-- opts = overrides.cmp,
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -111,7 +111,14 @@ return {
 			require("runner-nvchad").setup({})
 		end,
 	},
-
+	{
+		"ngtuonghy/live-server-nvim",
+		event = "VeryLazy",
+		build = ":LiveServerInstall",
+		config = function()
+			require("live-server-nvim").setup({})
+		end,
+	},
 	{
 		"ngtuonghy/live-server-nvim",
 		event = "VeryLazy",
@@ -131,17 +138,17 @@ return {
 		end,
 	},
 
-	{
-		"folke/noice.nvim",
-		event = "VeryLazy",
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
-		},
-		config = function()
-			require("configs.noice")
-		end,
-	},
+	-- {
+	-- 	"folke/noice.nvim",
+	-- 	event = "VeryLazy",
+	-- 	dependencies = {
+	-- 		"MunifTanjim/nui.nvim",
+	-- 		"rcarriga/nvim-notify",
+	-- 	},
+	-- 	config = function()
+	-- 		require("configs.noice")
+	-- 	end,
+	-- },
 
 	{
 		"mfussenegger/nvim-dap",
@@ -290,5 +297,35 @@ return {
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			"2kabhishek/nerdy.nvim",
 		},
+	},
+	{
+		"nvim-pack/nvim-spectre",
+	},
+	{
+		"mistricky/codesnap.nvim",
+		lazy = false,
+		build = "make build_generator",
+		keys = {
+			{ "<leader>cc", "<cmd>CodeSnap<cr>", mode = "x", desc = "Save selected code snapshot into clipboard" },
+			{ "<leader>cs", "<cmd>CodeSnapSave<cr>", mode = "x", desc = "Save selected code snapshot in ~/Pictures" },
+			{ "<leader>cp", "<cmd>CodeSnapPreviewOn<cr>", mode = "x", desc = "Preview selected code snapshot" },
+		},
+		config = function()
+			require("codesnap").setup({
+				mac_window_bar = false,
+				title = "ngtuonghy",
+				watermark = "ngtuonghy",
+				bg_x_padding = 122,
+				bg_y_padding = 82,
+			})
+		end,
+	},
+
+	{
+		"mfussenegger/nvim-jdtls",
+		ft = "java",
+		config = function()
+			require("configs.jdtls")
+		end,
 	},
 }
