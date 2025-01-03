@@ -12,6 +12,7 @@ require("mason-lspconfig").setup_handlers({
 	end,
 })
 require("mason-lspconfig").setup({})
+lspconfig.protols.setup({})
 --
 require("typescript-tools").setup({
 	on_attach = on_attach,
@@ -22,6 +23,7 @@ require("typescript-tools").setup({
 		},
 	},
 })
+
 lspconfig.volar.setup({
 	on_attach = on_attach,
 	-- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },

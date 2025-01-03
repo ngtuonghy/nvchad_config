@@ -5,6 +5,7 @@ local options = {
 		lua = { "stylua" },
 		c = { "clang-format" },
 		cpp = { "clang-format" },
+		java = { "clang-format" },
 
 		-- webdev
 		javascript = { "biome" },
