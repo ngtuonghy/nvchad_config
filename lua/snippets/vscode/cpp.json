@@ -1,0 +1,17 @@
+{
+	"create main with comment name": {
+		"prefix": "main",
+		"body": [
+			"#include <iostream>",
+			"using namespace std;",
+			"// ngtuonghy",
+			"int main (int argc, char *argv[]) {",
+			"\t$1",
+			"",
+			"\treturn 0;",
+			"}"
+		],
+		"description": "Standard starter template for a tiny C++ program"
+	},
+	
+}
