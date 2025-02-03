@@ -10,26 +10,36 @@ map("n", "<C-l>", "<C-w>l", { desc = "switch window right" })
 map("n", "<C-j>", "<C-w>j", { desc = "switch window down" })
 map("n", "<C-k>", "<C-w>k", { desc = "switch window up" })
 
+-- resize with arrows
+map('n', '<C-Up>', ':resize -2<CR>', { desc = 'Resize -2' })
+map('n', '<C-Down>', ':resize +2<CR>', { desc = 'Resize +2' })
+map('n', '<C-Left>', ':vertical resize -2<CR>', { desc = 'Vertical Resize -2' })
+map('n', '<C-Right>', ':vertical resize +2<CR>', { desc = 'Vertical Resize +2' })
+
 map("n", "<leader>ch", "<cmd>NvCheatsheet<CR>", { desc = "toggle nvcheatsheet" })
 
 -- nvimtree
 map("n", "<leader>e", "<cmd> NvimTreeToggle <CR>")
+map("n", "<leader>E", "<cmd> NvimTreeFindFile <CR>")
+
+-- oil
+map("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 -- telescope
 map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
 map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "telescope find buffers" })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "telescope help page" })
-map("n", "<leader>ma", "<cmd>Telescope marks<CR>", { desc = "telescope find marks" })
+map("n", "<leader>fm", "<cmd>Telescope marks<CR>", { desc = "telescope find marks" })
 map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "telescope find oldfiles" })
 map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "telescope find in current buffer" })
-map("n", "<leader>cm", "<cmd>Telescope git_commits<CR>", { desc = "telescope git commits" })
-map("n", "<leader>gt", "<cmd>Telescope git_status<CR>", { desc = "telescope git status" })
 map("n", "<leader>pt", "<cmd>Telescope terms<CR>", { desc = "telescope pick hidden term" })
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "telescope find files" })
 
--- tabufline
-map("n", "<leader>b", "<cmd>enew<CR>", { desc = "buffer new" })
+-- git
+map("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", { desc = "telescope git commits" })
+map("n", "<leader>gs", "<cmd>Telescope git_status<CR>", { desc = "telescope git status" })
 
+-- tabufline
 map("n", "<tab>", function()
   require("nvchad.tabufline").next()
 end, { desc = "buffer goto next" })
@@ -38,20 +48,32 @@ map("n", "<S-tab>", function()
   require("nvchad.tabufline").prev()
 end, { desc = "buffer goto prev" })
 
-map("n", "<leader>x", function()
-  require("nvchad.tabufline").close_buffer()
-end, { desc = "buffer close" })
+map("n", "<leader>bc", function()
+  require("nvchad.tabufline").closeAllBufs(false) -- excludes current buf
+end, { desc = "Close all buffers except the current" })
+
+map("n", "<leader>bC", function()
+  require("nvchad.tabufline").closeAllBufs(true) -- excludes current buf
+end, { desc = "Close all buffers" })
+
+map("n", "<leader>bl", function()
+  require("nvchad.tabufline").closeBufs_at_direction "left" -- or right
+end, { desc = "Close all buffers to the left of the current" })
+
+map("n", "<leader>br", function()
+  require("nvchad.tabufline").closeBufs_at_direction "right" -- or right
+end, { desc = "Close all buffers to the right of the current" })
 
 -- comment.nvim
 map("n", "<leader>/", "gcc", { remap = true })
 map("v", "<leader>/", "gc", { remap = true })
 
 -- format
-map("n", "<leader>fm", function()
+map("n", "<leader>cf", function()
   require("conform").format()
 end, { desc = "format code" })
 
-map("n", "<leader>th", function()
+map("n", "<leader>ut", function()
   require("nvchad.themes").open()
 end, { desc = "telescope nvchad themes" })
 
@@ -79,21 +101,6 @@ end, { desc = "terminal toggleable horizontal term" })
 map({ "n", "t" }, "<A-i>", function()
   require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
 end, { desc = "terminal toggle floating term" })
-
-
-
-map("n", "<leader>S", '<cmd>lua require("spectre").toggle()<CR>', {
-  desc = "Toggle Spectre",
-})
-map("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
-  desc = "Search current word",
-})
-map("v", "<leader>sw", '<esc><cmd>lua require("spectre").open_visual()<CR>', {
-  desc = "Search current word",
-})
-map("n", "<leader>sp", '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
-  desc = "Search on current file",
-})
 
 -- dap
 map("n", "<leader>db", function()
@@ -200,7 +207,6 @@ end, {})
 
 map("n", "<RightMouse>", function()
   vim.cmd.exec '"normal! \\<RightMouse>"'
-
   local options = vim.bo.ft == "NvimTree" and "nvimtree" or "default"
   require("menu").open(options, { mouse = true })
 end, {})

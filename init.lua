@@ -3,10 +3,10 @@ require "mappings"
 require "commands"
 require "autocmds"
 
-local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46_cache/"
 -- require("base46").load_all_highlights()
 
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
     "git",

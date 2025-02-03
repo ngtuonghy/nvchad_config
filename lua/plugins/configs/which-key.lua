@@ -1,0 +1,31 @@
+local wk = require "which-key"
+wk.add {
+  { "<leader>w", group = "[W]indow", icon = { icon = "", color = "orange" } },
+  { "<leader>b", group = "[B]uffer", icon = { icon = "󰓩", color = "purple" } },
+  { "<leader>g", group = "[G]it", icon = { icon = "󰊢", color = "green" } },
+  { "<leader>l", group = "[L]sp", icon = { icon = "", color = "yellow" } },
+  { "<leader>f", group = "[F]ind", icon = { icon = "", color = "red" } },
+  -- { "<leader>p", group = "[P]ackage", icon = { icon = "󰏖", color = "purple" } },
+  { "<leader>d", group = "[D]ebugger", icon = { icon = "", color = "red" } },
+  { "<leader>s", group = "[S]ession", icon = { icon = "󱂬", color = "blue" } },
+  { "<leader>x", group = "[X]Diagnostics/Quickfix", icon = { icon = "󰁨", color = "yellow" } },
+  { "<leader>r", group = "[R]eplace", icon = { icon = "", color = "green" } },
+  -- { "<leader>h", group = "[H]elp", icon = { icon = "", color = "blue" } },
+  { "<leader>u", group = "[U]I/UX", icon = { icon = "", color = "yellow" } },
+  { "<leader>o", group = "[O]pen", icon = { icon = "", color = "yellow" } },
+  { "<leader>z", group = "[Z]en", icon = { icon = "", color = "yellow" } },
+}
+
+-- wk.register {
+--   { "<leader>b", group = "󰓩 Buffers" },
+--   { "<leader>d", group = " Debugger" },
+--   { "<leader>f", group = " Find" },
+--   { "<leader>g", group = "󰊢 Git" },
+--   { "<leader>l", group = " lsp" },
+--   { "<leader>p", group = "󰏖 Packages" },
+--   { "<leader>r", group = " Replace" },
+--   { "<leader>s", group = "󱂬 Session" },
+--   { "<leader>u", group = " UI/UX" },
+--   { "<leader>w", group = " window" },
+--   { "<leader>x", group = "󰁨 diagnostics/quickfix" },
+-- },

@@ -113,7 +113,7 @@ local options = {
     },
   },
 
-  lsp = { signature = false},
+  lsp = { signature = false },
 
   cheatsheet = {
     theme = "grid", -- simple/grid

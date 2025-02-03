@@ -1,6 +1,7 @@
 local o = vim.o
 
 vim.g.mapleader = " "
+vim.g.maplocalleader = ','
 
 o.laststatus = 3 -- global statusline
 o.showmode = false

@@ -1,4 +1,3 @@
--- Use LspAttach autocommand to only map the following keys
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
   callback = function(ev)
@@ -18,7 +17,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end, opts)
     vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
     vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
-    vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
   end,
 })
@@ -46,7 +44,7 @@ capabilities.textDocument.completion.completionItem = {
 -- Setup language servers.
 local lspconfig = require "lspconfig"
 
-local servers = { "html", "cssls", "csharp_ls",  }
+local servers = { "html", "cssls", "csharp_ls" }
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -63,19 +61,18 @@ lspconfig.lua_ls.setup {
   },
 }
 
-lspconfig.tailwindcss.setup({
-	settings = {
-		tailwindCSS = {
-			experimental = {
-				classRegex = {
-					{ "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
-					{ "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
-				},
-			},
-		},
-	},
-})
-
+lspconfig.tailwindcss.setup {
+  settings = {
+    tailwindCSS = {
+      experimental = {
+        classRegex = {
+          { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+          { "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+        },
+      },
+    },
+  },
+}
 
 lspconfig.clangd.setup {
   capabilities = { offsetEncoding = "utf-8" },
@@ -109,6 +106,20 @@ end
 --   },
 -- }
 --
+--   lspconfig.sqlls.setup({
+-- 	capabilities = capabilities,
+-- 	filetypes = { "sql" },
+-- 	root_dir = function(_)
+-- 		return vim.loop.cwd()
+-- 	end,
+-- })
+--
+--   lspconfig.sqlls.setup({
+-- 	capabilities = capabilities,
+-- 	filetypes = { "sql", "mysql", "pgsql" },
+--   cmd = { "sql-language-server", "up", "--method", "stdio" },
+--
+-- })
 
 lspconfig.vtsls.setup {
   capabilities = capabilities,

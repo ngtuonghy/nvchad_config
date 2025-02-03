@@ -1,11 +1,11 @@
 return {
   "NvChad/nvcommunity",
-  { import = "nvcommunity.git.lazygit" },
+  -- { import = "nvcommunity.git.lazygit" },
   { import = "nvcommunity.editor.rainbowdelimiters" },
   { import = "nvcommunity.editor.illuminate" },
   { import = "nvcommunity.editor.rainbowdelimiters" },
   { import = "nvcommunity.file-explorer.oil-nvim" },
-  { import = "nvcommunity.diagnostics.trouble" },
+  -- { import = "nvcommunity.diagnostics.trouble" },
 
   { lazy = true, "nvim-lua/plenary.nvim" },
   { "wakatime/vim-wakatime", event = "BufReadPost" },
@@ -100,14 +100,14 @@ return {
     keys = {
       vim.keymap.set(
         "n",
-        "<leader>gr",
+        "<leader>rc",
         '<cmd>lua require("grug-far").open({ prefills = { paths = vim.fn.expand("%") } })<CR>',
         { desc = "Launch, limiting search/replace to current file" }
       ),
 
       vim.keymap.set(
         "v",
-        "<leader>gr",
+        "<leader>rc",
         '<cmd>lua require("grug-far").open({ prefills = { search = vim.fn.expand("<cword>"), paths = vim.fn.expand("%") } })<CR>',
         { desc = "Launch with the current word under the cursor as the search string" }
       ),
@@ -122,10 +122,19 @@ return {
     event = { "InsertEnter" },
     cmd = { "Copilot" },
     opts = {
-      -- suggestion = { enabled = false },
-      -- panel = { enabled = false },
       suggestion = {
+        enabled = true,
         auto_trigger = true,
+        hide_during_completion = true,
+        debounce = 75,
+        keymap = {
+          accept = "<S-Tab>",
+          accept_word = false,
+          accept_line = false,
+          next = "<M-]>",
+          prev = "<M-[>",
+          dismiss = "<C-]>",
+        },
       },
     },
   },
@@ -135,15 +144,14 @@ return {
     dependencies = {
       {
         "L3MON4D3/LuaSnip",
+        version = "v2.*",
+        build = "make install_jsregexp",
         dependencies = "rafamadriz/friendly-snippets",
-        opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+        -- opts = { history = true, updateevents = "TextChanged,TextChangedI" },
         config = function(_, opts)
-          require("luasnip").config.set_config(opts)
+          -- require("luasnip").config.set_config(opts)
           require "plugins.configs.luasnip"
         end,
-        {
-          "giuxtaposition/blink-cmp-copilot",
-        },
       },
     },
     version = "*",
@@ -182,10 +190,17 @@ return {
           },
         },
       },
+      snippets = { preset = "luasnip" },
       sources = {
-        default = { "lsp", "luasnip", "path", "snippets", "buffer" },
+        default = { "lsp", "path", "snippets", "buffer" },
+        -- providers = {
+        --   snippets = {
+        --     opts = {
+        --       search_paths = vim.g.vscode_snippets_path
+        --     },
+        --   },
+        -- },
       },
-
       appearance = {
         -- Sets the fallback highlight groups to nvim-cmp's highlight groups
         -- Useful for when your theme doesn't support blink.cmp
@@ -289,7 +304,7 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    opts = {},
+    opts = require "plugins.configs.gitsigns",
   },
 
   {
@@ -317,7 +332,6 @@ return {
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
-    opts = {},
     keys = {
       {
         "<leader>?",
@@ -327,6 +341,9 @@ return {
         desc = "Buffer Local Keymaps (which-key)",
       },
     },
+    config = function()
+      require "plugins.configs.which-key"
+    end,
   },
 
   -- NOTE: NVCHAD UI
@@ -378,11 +395,185 @@ return {
 
   {
     "OXY2DEV/markview.nvim",
-    -- lazy = false,      -- Recommended
     ft = "markdown", -- If you decide to lazy-load anyway
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons",
+    },
+  },
+
+  {
+    "gbprod/yanky.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      { "kkharji/sqlite.lua" },
+    },
+    config = function()
+      require("yanky").setup {
+        highlight = { timer = 100 },
+        ring = { storage = "sqlite", history_length = 1000 },
+        history_length = 1000,
+      }
+    end,
+  },
+
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    ---@type Flash.Config
+    opts = {},
+  -- stylua: ignore
+  keys = {
+    { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+    { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+    { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+    { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+    { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+  },
+  },
+  {
+    "kevinhwang91/nvim-ufo",
+    dependencies = {
+      "kevinhwang91/promise-async",
+      {
+        "luukvbaal/statuscol.nvim",
+        config = function()
+          require "plugins.configs.statuscol"
+        end,
+      },
+    },
+    event = "VeryLazy",
+    config = function()
+      require "plugins.configs.nvim-ufo"
+    end,
+  },
+  {
+    "folke/trouble.nvim",
+    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    cmd = "Trouble",
+    keys = {
+      {
+        "<leader>tx",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Diagnostics (Trouble)",
+      },
+      {
+        "<leader>tX",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Buffer Diagnostics (Trouble)",
+      },
+      {
+        "<leader>ts",
+        "<cmd>Trouble symbols toggle focus=false<cr>",
+        desc = "Symbols (Trouble)",
+      },
+      {
+        "<leader>tl",
+        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+        desc = "LSP Definitions / references / ... (Trouble)",
+      },
+      {
+        "<leader>tL",
+        "<cmd>Trouble loclist toggle<cr>",
+        desc = "Location List (Trouble)",
+      },
+      {
+        "<leader>tQ",
+        "<cmd>Trouble qflist toggle<cr>",
+        desc = "Quickfix List (Trouble)",
+      },
+    },
+  },
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    dependencies = {
+      { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+      { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+    },
+    build = "make tiktoken", -- Only on MacOS or Linux
+    opts = {
+      -- See Configuration section for options
+    },
+    -- See Commands section for default commands if you want to lazy load on them
+  },
+  {
+    "sindrets/diffview.nvim",
+  },
+  { "akinsho/git-conflict.nvim", version = "*", config = true },
+  {
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "VeryLazy", -- Or `LspAttach`
+    priority = 1000, -- needs to be loaded in first
+    config = function()
+      require("tiny-inline-diagnostic").setup()
+      local x = vim.diagnostic.severity
+      vim.diagnostic.config {
+        virtual_text = false,
+        signs = { text = { [x.ERROR] = "󰅙", [x.WARN] = "", [x.INFO] = "󰋼", [x.HINT] = "󰌵" } },
+        underline = true,
+        float = { border = "single" },
+      }
+    end,
+  },
+  -- lazy.nvim
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    ---@type snacks.Config
+    opts = {
+      bigfile = {
+        enabled = true,
+        notify = true, -- show notification when big file detected
+        size = 1.5 * 1024 * 1024, -- 1.5MBfalse
+        -- Enable or disable features when big file detected
+        ---@param ctx {buf: number, ft:string}
+        setup = function(ctx)
+          if vim.fn.exists ":NoMatchParen" ~= 0 then
+            vim.cmd [[NoMatchParen]]
+          end
+          Snacks.util.wo(0, { foldmethod = "manual", statuscolumn = "", conceallevel = 0 })
+          vim.b.minianimate_disable = true
+          vim.schedule(function()
+            if vim.api.nvim_buf_is_valid(ctx.buf) then
+              vim.bo[ctx.buf].syntax = ctx.ft
+            end
+          end)
+        end,
+      },
+      notifier = { enabled = true },
+      notify = { enabled = true },
+      lazygit = { enabled = true },
+      picker = { enabled = true },
+      git = { enabled = true },
+    },
+    keys = {
+    { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
+    { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
+    { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
+    { "<leader><space>", function() Snacks.picker.files() end, desc = "Find Files" },
+    { "<leader>P", function() Snacks.picker() end, desc = "Show all pickers" },
+    {
+        "<leader>gf",
+        function()
+          Snacks.lazygit.log_file()
+        end,
+        desc = "Lazygit Current File History",
+      },
+      {
+        "<leader>gg",
+        function()
+          Snacks.lazygit()
+        end,
+        desc = "Lazygit",
+      },
+      {
+        "<leader>gl",
+        function()
+          Snacks.lazygit.log()
+        end,
+        desc = "Lazygit Log (cwd)",
+      },
     },
   },
 }
