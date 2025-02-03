@@ -7,7 +7,7 @@ wk.add {
   { "<leader>f", group = "[F]ind", icon = { icon = "", color = "red" } },
   -- { "<leader>p", group = "[P]ackage", icon = { icon = "󰏖", color = "purple" } },
   { "<leader>d", group = "[D]ebugger", icon = { icon = "", color = "red" } },
-  { "<leader>s", group = "[S]ession", icon = { icon = "󱂬", color = "blue" } },
+  { "<leader>s", group = "[S]earch", icon = { icon = "󱂬", color = "blue" } },
   { "<leader>x", group = "[X]Diagnostics/Quickfix", icon = { icon = "󰁨", color = "yellow" } },
   { "<leader>r", group = "[R]eplace", icon = { icon = "", color = "green" } },
   -- { "<leader>h", group = "[H]elp", icon = { icon = "", color = "blue" } },

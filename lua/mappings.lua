@@ -11,33 +11,65 @@ map("n", "<C-j>", "<C-w>j", { desc = "switch window down" })
 map("n", "<C-k>", "<C-w>k", { desc = "switch window up" })
 
 -- resize with arrows
-map('n', '<C-Up>', ':resize -2<CR>', { desc = 'Resize -2' })
-map('n', '<C-Down>', ':resize +2<CR>', { desc = 'Resize +2' })
-map('n', '<C-Left>', ':vertical resize -2<CR>', { desc = 'Vertical Resize -2' })
-map('n', '<C-Right>', ':vertical resize +2<CR>', { desc = 'Vertical Resize +2' })
+map("n", "<C-Up>", ":resize -2<CR>", { desc = "Resize -2" })
+map("n", "<C-Down>", ":resize +2<CR>", { desc = "Resize +2" })
+map("n", "<C-Left>", ":vertical resize -2<CR>", { desc = "Vertical Resize -2" })
+map("n", "<C-Right>", ":vertical resize +2<CR>", { desc = "Vertical Resize +2" })
 
 map("n", "<leader>ch", "<cmd>NvCheatsheet<CR>", { desc = "toggle nvcheatsheet" })
 
 -- nvimtree
 map("n", "<leader>e", "<cmd> NvimTreeToggle <CR>")
 map("n", "<leader>E", "<cmd> NvimTreeFindFile <CR>")
+map("n", "<leader>n", function () Snacks.explorer() end,{ desc = "Explorer" })
 
 -- oil
 map("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
--- telescope
-map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
-map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "telescope find buffers" })
-map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "telescope help page" })
-map("n", "<leader>fm", "<cmd>Telescope marks<CR>", { desc = "telescope find marks" })
-map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "telescope find oldfiles" })
-map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "telescope find in current buffer" })
-map("n", "<leader>pt", "<cmd>Telescope terms<CR>", { desc = "telescope pick hidden term" })
-map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "telescope find files" })
+-- find
+map("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Buffers" })
+map("n", "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, { desc = "Find Config File" })
+map("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "Find Files" })
+map("n", "<leader>fg", function() Snacks.picker.git_files() end, { desc = "Find Git Files" })
+map("n", "<leader>fw", function() Snacks.picker.grep() end, { desc = "Find Grep" })
+map("n", "<leader>fo", function() Snacks.picker.recent() end, { desc = "Recent" })
 
 -- git
-map("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", { desc = "telescope git commits" })
-map("n", "<leader>gs", "<cmd>Telescope git_status<CR>", { desc = "telescope git status" })
+map("n", "<leader>gc", function() Snacks.picker.git_log() end, { desc = "Git Log" })
+map("n", "<leader>gs", function() Snacks.picker.git_status() end, { desc = "Git Status" })
+map("n", "<leader>gg", function() Snacks.lazygit() end, { desc = "Lazygit" })
+map("n", "<leader>gf", function() Snacks.lazygit.log_file() end,{ desc = "Lazygit Current File History" })
+map("n", "<leader>gb", function() Snacks.git.blame_line() end,{ desc = "Git Blame Line" })
+
+-- Grep
+map("n", "<leader>sb", function() Snacks.picker.lines() end, { desc = "Buffer Lines" })
+map("n", "<leader>sB", function() Snacks.picker.grep_buffers() end, { desc = "Grep Open Buffers" })
+map({ "n", "x" }, "<leader>sw", function() Snacks.picker.grep_word() end, { desc = "Visual selection or word" })
+
+-- search
+map("n", "<leader>s\"", function() Snacks.picker.registers() end, { desc = "Registers" })
+map("n", "<leader>sa", function() Snacks.picker.autocmds() end, { desc = "Autocmds" })
+map("n", "<leader>sc", function() Snacks.picker.command_history() end, { desc = "Command History" })
+map("n", "<leader>sC", function() Snacks.picker.commands() end, { desc = "Commands" })
+map("n", "<leader>sd", function() Snacks.picker.diagnostics() end, { desc = "Diagnostics" })
+map("n", "<leader>sh", function() Snacks.picker.help() end, { desc = "Help Pages" })
+map("n", "<leader>sH", function() Snacks.picker.highlights() end, { desc = "Highlights" })
+map("n", "<leader>sj", function() Snacks.picker.jumps() end, { desc = "Jumps" })
+map("n", "<leader>sk", function() Snacks.picker.keymaps() end, { desc = "Keymaps" })
+map("n", "<leader>sl", function() Snacks.picker.loclist() end, { desc = "Location List" })
+map("n", "<leader>sM", function() Snacks.picker.man() end, { desc = "Man Pages" })
+map("n", "<leader>sm", function() Snacks.picker.marks() end, { desc = "Marks" })
+map("n", "<leader>sR", function() Snacks.picker.resume() end, { desc = "Resume" })
+map("n", "<leader>sq", function() Snacks.picker.qflist() end, { desc = "Quickfix List" })
+-- map("n", "<leader>uC", function() Snacks.picker.colorschemes() end, { desc = "Colorschemes" })
+map("n", "<leader>qp", function() Snacks.picker.projects() end, { desc = "Projects" })
+
+-- LSP
+map("n", "gd", function() Snacks.picker.lsp_definitions() end, { desc = "Goto Definition" })
+map("n", "gr", function() Snacks.picker.lsp_references() end, { nowait = true, desc = "References" })
+map("n", "gI", function() Snacks.picker.lsp_implementations() end, { desc = "Goto Implementation" })
+map("n", "gy", function() Snacks.picker.lsp_type_definitions() end, { desc = "Goto T[y]pe Definition" })
+map("n", "<leader>ss", function() Snacks.picker.lsp_symbols() end, { desc = "LSP Symbols" })
 
 -- tabufline
 map("n", "<tab>", function()
@@ -51,6 +83,10 @@ end, { desc = "buffer goto prev" })
 map("n", "<leader>bc", function()
   require("nvchad.tabufline").closeAllBufs(false) -- excludes current buf
 end, { desc = "Close all buffers except the current" })
+
+map("n", "<leader>bx", function()
+  require("nvchad.tabufline").close_buffer() -- excludes current buf
+end, { desc = "Close buffer" })
 
 map("n", "<leader>bC", function()
   require("nvchad.tabufline").closeAllBufs(true) -- excludes current buf
