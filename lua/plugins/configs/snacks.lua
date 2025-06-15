@@ -32,6 +32,10 @@ return {
   git = { enabled = true },
   toggle = { enabled = true },
   dim = { enabled = true },
+  scope = { enabled = true },
+  scroll = { enabled = true },
+  statuscolumn = { enabled = true },
+   words = { enabled = true },
   indent = {
     enabled = true,
     priority = 1,
@@ -50,15 +54,6 @@ return {
     --     "SnacksIndent7",
     --     "SnacksIndent8",
     -- }
-  },
-  input = {
-    enabled = false,
-    icon = " ",
-    icon_hl = "SnacksInputIcon",
-    icon_pos = "left",
-    prompt_pos = "title",
-    win = { style = "input" },
-    expand = true,
   },
   terminal = {
     win = {

@@ -45,6 +45,7 @@ return {
                 enable_rename = true, -- Auto rename pairs of tags
                 enable_close_on_slash = false, -- Auto close on trailing </
               },
+
               -- Also override individual filetype configs, these take priority.
               -- Empty by default, useful if one of the "opts" global settings
               -- doesn't work well in a specific filetype
@@ -128,22 +129,28 @@ return {
 
   {
     "zbirenbaum/copilot.lua",
-    event = { "InsertEnter" },
-    cmd = { "Copilot" },
+    enabled= true,
+    cmd = "Copilot",
+    build = ":Copilot auth",
+    event = "BufReadPost",
     opts = {
       suggestion = {
         enabled = true,
         auto_trigger = true,
         hide_during_completion = true,
-        debounce = 75,
         keymap = {
-          accept = "<S-Tab>",
+          accept = "<Tab>", -- "<M-l>",
           accept_word = false,
           accept_line = false,
           next = "<M-]>",
           prev = "<M-[>",
           dismiss = "<C-]>",
         },
+      },
+      panel = { enabled = false },
+      filetypes = {
+        markdown = true,
+        help = true,
       },
     },
   },
@@ -153,18 +160,26 @@ return {
     dependencies = {
       {
         "L3MON4D3/LuaSnip",
-        version = "v2.*",
-        build = "make install_jsregexp",
-        dependencies = "rafamadriz/friendly-snippets",
-        -- opts = { history = true, updateevents = "TextChanged,TextChangedI" },
-        config = function(_, opts)
-          -- require("luasnip").config.set_config(opts)
-          require "plugins.configs.luasnip"
-        end,
+        lazy = true,
+        dependencies = {
+          {
+            "rafamadriz/friendly-snippets",
+            config = function()
+              require("luasnip.loaders.from_vscode").lazy_load()
+              require("luasnip.loaders.from_vscode").lazy_load { paths = { vim.fn.stdpath "config" .. "/snippets" } }
+            end,
+          },
+        },
+        opts = {
+          history = true,
+          delete_check_events = "TextChanged",
+        },
       },
+      -- "giuxtaposition/blink-cmp-copilot",
     },
     version = "*",
     opts = require "plugins.configs.blink",
+    opts_extend = { "sources.default" },
   },
 
   {
@@ -206,6 +221,7 @@ return {
 
   {
     "mfussenegger/nvim-jdtls",
+    enabled = false, -- Disable this plugin if you don't use Java
     -- ft = "java",
     config = function()
       require "plugins.configs.jdtls"
@@ -330,6 +346,7 @@ return {
   },
   {
     "kevinhwang91/nvim-ufo",
+    enabled = true,
     dependencies = {
       "kevinhwang91/promise-async",
       {
@@ -383,6 +400,7 @@ return {
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
+    enabled = false, -- Disable this plugin if you don't use Copilot Chat
     dependencies = {
       { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
       { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
@@ -421,23 +439,24 @@ return {
     lazy = false,
     ---@type snacks.Config
     opts = require "plugins.configs.snacks",
-    keys = {
-      {
-        "<c-m>",
-        function()
-          Snacks.terminal()
-        end,
-        desc = "Toggle Terminal",
-      },
-      {
-        "<c-_>",
-        function()
-          Snacks.terminal()
-        end,
-        desc = "which_key_ignore",
-      },
-    },
+    -- keys = {
+    --   {
+    --   --   "<c-m>",
+    --   --   function()
+    --   --     Snacks.terminal()
+    --   --   end,
+    --   --   desc = "Toggle Terminal",
+    --   -- },
+    --   -- {
+    --   --   "<c-_>",
+    --   --   function()
+    --   --     Snacks.terminal()
+    --   --   end,
+    --   --   desc = "which_key_ignore",
+    --    },
+    --},
   },
+
   {
     "folke/todo-comments.nvim",
     event = "VeryLazy",
@@ -458,6 +477,24 @@ return {
           Snacks.picker.todo_comments { keywords = { "TODO", "FIX", "FIXME" } }
         end,
         desc = "Todo/Fix/Fixme",
+      },
+    },
+  },
+
+  {
+    "smoka7/multicursors.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "nvimtools/hydra.nvim",
+    },
+    opts = {},
+    cmd = { "MCstart", "MCvisual", "MCclear", "MCpattern", "MCvisualPattern", "MCunderCursor" },
+    keys = {
+      {
+        mode = { "v", "n" },
+        "<Leader>m",
+        "<cmd>MCstart<cr>",
+        desc = "Create a selection for selected text or word under the cursor",
       },
     },
   },

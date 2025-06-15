@@ -33,6 +33,7 @@ map("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "Find File
 map("n", "<leader>fg", function() Snacks.picker.git_files() end, { desc = "Find Git Files" })
 map("n", "<leader>fw", function() Snacks.picker.grep() end, { desc = "Find Grep" })
 map("n", "<leader>fo", function() Snacks.picker.recent() end, { desc = "Recent" })
+map("n", "<leader>fp", function() Snacks.picker.projects() end, { desc = "Find projects" })
 
 -- git
 map("n", "<leader>gc", function() Snacks.picker.git_log() end, { desc = "Git Log" })
@@ -40,6 +41,8 @@ map("n", "<leader>gs", function() Snacks.picker.git_status() end, { desc = "Git 
 map("n", "<leader>gg", function() Snacks.lazygit() end, { desc = "Lazygit" })
 map("n", "<leader>gf", function() Snacks.lazygit.log_file() end,{ desc = "Lazygit Current File History" })
 map("n", "<leader>gb", function() Snacks.git.blame_line() end,{ desc = "Git Blame Line" })
+map("n", "<leader>gd", function() Snacks.picker.git_diff() end,{ desc = "Git Diff (Hunks)" })
+map( { "n", "v" } ,"<leader>gB", function() Snacks.gitbrowse() end,{ desc = "Git Browse" })
 
 -- Grep
 map("n", "<leader>sb", function() Snacks.picker.lines() end, { desc = "Buffer Lines" })
@@ -47,8 +50,9 @@ map("n", "<leader>sB", function() Snacks.picker.grep_buffers() end, { desc = "Gr
 map({ "n", "x" }, "<leader>sw", function() Snacks.picker.grep_word() end, { desc = "Visual selection or word" })
 
 -- search
-map("n", "<leader>s\"", function() Snacks.picker.registers() end, { desc = "Registers" })
+-- map("n", "<leader>s\"", function() Snacks.picker.registers() end, { desc = "Registers" })
 map("n", "<leader>sa", function() Snacks.picker.autocmds() end, { desc = "Autocmds" })
+map("n", "<leader>su", function() Snacks.picker.undo() end, {desc = "Undo History" })
 map("n", "<leader>sc", function() Snacks.picker.command_history() end, { desc = "Command History" })
 map("n", "<leader>sC", function() Snacks.picker.commands() end, { desc = "Commands" })
 map("n", "<leader>sd", function() Snacks.picker.diagnostics() end, { desc = "Diagnostics" })
@@ -61,15 +65,21 @@ map("n", "<leader>sM", function() Snacks.picker.man() end, { desc = "Man Pages" 
 map("n", "<leader>sm", function() Snacks.picker.marks() end, { desc = "Marks" })
 map("n", "<leader>sR", function() Snacks.picker.resume() end, { desc = "Resume" })
 map("n", "<leader>sq", function() Snacks.picker.qflist() end, { desc = "Quickfix List" })
--- map("n", "<leader>uC", function() Snacks.picker.colorschemes() end, { desc = "Colorschemes" })
 map("n", "<leader>qp", function() Snacks.picker.projects() end, { desc = "Projects" })
 
 -- LSP
-map("n", "gd", function() Snacks.picker.lsp_definitions() end, { desc = "Goto Definition" })
-map("n", "gr", function() Snacks.picker.lsp_references() end, { nowait = true, desc = "References" })
-map("n", "gI", function() Snacks.picker.lsp_implementations() end, { desc = "Goto Implementation" })
-map("n", "gy", function() Snacks.picker.lsp_type_definitions() end, { desc = "Goto T[y]pe Definition" })
+map("n", "gd",function() Snacks.picker.lsp_definitions() end, { desc = "Goto Definition" })
+map("n", "gr",function() Snacks.picker.lsp_references() end, { nowait = true, desc = "References" })
+map("n", "gI",function() Snacks.picker.lsp_implementations() end, { desc = "Goto Implementation" })
+map("n", "gy",function() Snacks.picker.lsp_type_definitions() end, { desc = "Goto T[y]pe Definition" })
 map("n", "<leader>ss", function() Snacks.picker.lsp_symbols() end, { desc = "LSP Symbols" })
+map("n","<c-/>",function() Snacks.terminal() end, {desc = "Toggle Terminal" })
+map( "n","<c-_>",function() Snacks.terminal() end,{ desc = "which_key_ignore" })
+map("n", "<leader>z",function() Snacks.zen() end, {desc = "Toggle Zen Mode" })
+map("n","<leader>Z",function() Snacks.zen.zoom() end, {desc = "Toggle Zoom" })
+map("n", "<leader>cR",function() Snacks.rename.rename_file() end, {desc = "Rename File" })
+map({"n","t"}, "]]",function() Snacks.words.jump(vim.v.count1) end, {desc = "Next Reference"  })
+map({"n","t"} ,"[[",function() Snacks.words.jump(-vim.v.count1) end, {desc = "Prev Reference"  })
 
 -- tabufline
 map("n", "<tab>", function()

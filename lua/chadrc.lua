@@ -83,7 +83,7 @@ local options = {
       { txt = "󰈭  Find Word", keys = "fw", cmd = "Find live grep" },
       { txt = "󱥚  Themes", keys = "th", cmd = ":lua require('nvchad.themes').open()" },
       { txt = "  Mappings", keys = "ch", cmd = "NvCheatsheet" },
-
+      { txt = "  Projects", keys = "fp", cmd = ":lua Snacks.picker.projects()" },
       { txt = "─", hl = "NvDashFooter", no_gap = true, rep = true },
 
       {

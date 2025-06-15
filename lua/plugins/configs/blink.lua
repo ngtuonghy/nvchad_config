@@ -15,30 +15,49 @@ return {
     -- window = { border = "single" }
   },
   completion = {
-    accept = { auto_brackets = { enabled = true } },
+    accept = { auto_brackets = { enabled = false } },
     -- documentation = { window = { border = "single" } },
-    trigger = {
-      show_on_keyword = true,
-      show_on_trigger_character = true,
+    documentation = {
+      auto_show = true,
+      auto_show_delay_ms = 200,
     },
+    -- trigger = {
+    --   show_on_keyword = true,
+    --   show_on_trigger_character = true,
+    -- },
     menu = {
       -- border = "single",
       draw = {
         -- padding = 1,
-        columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind", gap = 1 } },
+        -- columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind", gap = 1 } },
       },
     },
   },
   snippets = { preset = "luasnip" },
   sources = {
-    default = { "lsp", "path", "snippets", "buffer" },
-    -- providers = {
-    --   snippets = {
-    --     opts = {
-    --       search_paths = vim.g.vscode_snippets_path
-    --     },
-    --   },
-    -- },
+    default = {
+      "lsp",
+      "path",
+      "snippets",
+      "buffer" --[[, "copilot" ]],
+    },
+    providers = {
+      -- copilot = {
+      --   name = "copilot",
+      --   module = "blink-cmp-copilot",
+      --   score_offset = 100,
+      --   async = true,
+      --   transform_items = function(_, items)
+      --     local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+      --     local kind_idx = #CompletionItemKind + 1
+      --     CompletionItemKind[kind_idx] = "Copilot"
+      --     for _, item in ipairs(items) do
+      --       item.kind = kind_idx
+      --     end
+      --     return items
+      --   end,
+      -- },
+    },
   },
   appearance = {
     -- Sets the fallback highlight groups to nvim-cmp's highlight groups
@@ -55,7 +74,7 @@ return {
       Function = "󰆧", --  "󰊕",
       Constructor = "",
       Field = "󰜢",
-      Variable = "󰀫",
+      Variable = '󰆦', --"󰀫",
       Class = "󰠱",
       Interface = "",
       Module = "", --  "󰅩",
@@ -94,4 +113,3 @@ return {
     },
   },
 }
--- opts_extend = { "sources.default" },

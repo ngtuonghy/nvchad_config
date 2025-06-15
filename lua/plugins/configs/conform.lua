@@ -6,7 +6,8 @@ return {
     cs = { "clang-format" },
     cpp = { "clang-format" },
     java = { "clang-format" },
-    sql = { "sqlfluff" },
+    sql = { "sql_formatter" },
+
 
     -- webdev
     javascript = { "biome" },
