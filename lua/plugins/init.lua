@@ -129,7 +129,7 @@ return {
 
   {
     "zbirenbaum/copilot.lua",
-    enabled= true,
+    enabled = true,
     cmd = "Copilot",
     build = ":Copilot auth",
     event = "BufReadPost",
@@ -398,6 +398,7 @@ return {
       },
     },
   },
+
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     enabled = false, -- Disable this plugin if you don't use Copilot Chat
@@ -496,6 +497,17 @@ return {
         "<cmd>MCstart<cr>",
         desc = "Create a selection for selected text or word under the cursor",
       },
+    },
+  },
+
+  {
+    "nvzone/showkeys",
+    cmd = "ShowkeysToggle",
+    opts = {
+      timeout = 1,
+      maxkeys = 5,
+      position = "top-right"
+      -- more opts
     },
   },
 }
